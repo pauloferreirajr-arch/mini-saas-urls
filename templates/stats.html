@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set titulo = "Estatísticas - " ~ url.slug %}
+
+{% block content %}
+<h1>URL encurtada!</h1>
+
+<div class="stat-box">
+  <span class="label">URL encurtada</span>
+  <div class="short-url" onclick="copiarLink(this)" data-url="{{ request.url.scheme }}://{{ request.url.netloc }}/{{ url.slug }}">
+    {{ request.url.netloc }}/{{ url.slug }}
+  </div>
+</div>
+
+<div class="stat-box">
+  <span class="label">URL original</span>
+  <div class="original-url" title="{{ url.url_original }}">
+    {{ url.url_original[:60] ~ "..." if url.url_original|length > 60 else url.url_original }}
+  </div>
+</div>
+
+<div class="stat-box">
+  <span class="label">Total de cliques</span>
+  <div>{{ url.total_cliques }}</div>
+</div>
+
+<div class="stat-box">
+  <span class="label">Criada em</span>
+  <div>{{ url.criado_em.strftime("%d/%m/%Y às %H:%M") }}</div>
+</div>
+
+<a class="voltar" href="/">← Encurtar outra URL</a>
+
+<script>
+function copiarLink(el) {
+  const url = el.dataset.url;
+  navigator.clipboard.writeText(url).then(() => {
+    const original = el.textContent;
+    el.textContent = "Copiado!";
+    setTimeout(() => { el.textContent = original; }, 1200);
+  });
+}
+</script>
+{% endblock %}

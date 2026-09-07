@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% set titulo = "Encurte sua URL" %}
+
+{% block content %}
+<h1>Encurte sua URL</h1>
+
+{% if erro %}
+<p class="erro">{{ erro }}</p>
+{% endif %}
+
+<form method="post" action="/criar">
+  <input type="url" name="url_original" placeholder="https://exemplo.com/pagina-longa" required>
+  <button type="submit">Encurtar</button>
+</form>
+{% endblock %}
