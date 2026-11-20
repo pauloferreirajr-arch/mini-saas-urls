@@ -20,7 +20,11 @@ Aplicação web para encurtar URLs e rastrear cliques. MVP de aprendizado, não 
 - `database.py`  - modelo SQLAlchemy, sessão, criação de tabelas
 - `utils.py`     - gerador de slug, validação de URL
 - `/templates`   - arquivos HTML (base.html, index.html, stats.html)
-- `/static`      - CSS e JavaScript
+- `/statistic`   - vazia (o app não monta arquivos estáticos; estilos ficam nos templates)
+
+## Regras do repositório
+- Repositório **público**: nada interno, sem credenciais, sem dados de clientes ou pessoais.
+- `urls.db` não é versionado (`*.db` no `.gitignore`).
 
 ## Regras de negócio
 - Slug: 6 caracteres alfanuméricos aleatórios

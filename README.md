@@ -19,11 +19,23 @@ Aplicação web para encurtar URLs e rastrear cliques. MVP de aprendizado, não 
 ## Como rodar
 
 ```bash
-pip install -r requirements.txt
-uvicorn main:app --reload
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/uvicorn main:app --reload
 ```
 
-A aplicação sobe em `http://127.0.0.1:8000`. O arquivo `urls.db` (SQLite) é criado automaticamente na primeira execução.
+A aplicação sobe em `http://127.0.0.1:8000`. O arquivo `urls.db` (SQLite) é criado automaticamente na primeira execução (fica fora do Git).
+
+Não usa variáveis de ambiente nem credenciais.
+
+## Rotas
+
+| Rota | O que faz |
+|---|---|
+| `GET /` | Formulário para encurtar uma URL |
+| `POST /criar` | Cria o slug e mostra o link curto |
+| `GET /stats/{slug}` | Estatísticas da URL (cliques, data de criação) |
+| `GET /{slug}` | Redireciona para a URL original e conta o clique |
 
 ## Estrutura de arquivos
 
@@ -40,5 +52,11 @@ utils.py     - gerador de slug, validação de URL
 - URL deve começar com `http://` ou `https://`
 - Slugs são únicos (verificados antes de salvar)
 - 404 para slugs inexistentes
+
+## Estado atual e pendências
+
+- **Estado:** MVP de aprendizado, funcional. Não é para produção.
+- Sem autenticação, sem limite de requisições e sem testes automatizados.
+- A pasta `statistic/` está vazia e o app não serve arquivos estáticos (o CSS fica nos templates).
 
 Mais contexto do projeto em [CLAUDE.md](CLAUDE.md).
